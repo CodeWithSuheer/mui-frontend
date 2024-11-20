@@ -125,6 +125,18 @@ export default function ProductNewEditForm({ currentProduct }) {
     }
   }, [currentProduct?.taxes, includeTaxes, setValue]);
 
+  const handleRemoveFile = useCallback(
+    (inputFile) => {
+      const filtered = values.images && values.images?.filter((file) => file !== inputFile);
+      setValue('images', filtered);
+    },
+    [setValue, values.images]
+  );
+
+  const handleRemoveAllFiles = useCallback(() => {
+    setValue('images', []);
+  }, [setValue]);
+
   const onSubmit = handleSubmit(async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
